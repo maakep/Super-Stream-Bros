@@ -1,30 +1,30 @@
 $(document).ready(function() {
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20For%20Wii%20U&callback=?', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20For%20Wii%20U&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#4streamwiiu").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-$.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for%20Nintendo%203DS&callback=?', function(d) {
+$.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for%20Nintendo%203DS&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#4stream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.&callback=?', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#64Stream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Melee&callback=?', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Melee&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#meleeStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Brawl&callback=?', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Brawl&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#brawlStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Project%20M&callback=?', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Project%20M&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
         $("#pmStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
