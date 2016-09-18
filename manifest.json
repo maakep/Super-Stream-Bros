@@ -17,6 +17,6 @@
    "permissions": [ "https://api.twitch.tv/kraken/*/" ],
    "short_name": "Smash Streams",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "6.23",
+   "version": "6.24",
    "web_accessible_resources": [ "css/*.css", "js/*.js" ]
 }
