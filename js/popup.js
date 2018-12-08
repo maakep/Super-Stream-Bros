@@ -24,9 +24,9 @@ $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for
         $("#brawlStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Project%20M&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
+  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Ultimate&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
     $.each(d.streams, function(i, stream){
-        $("#pmStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
+        $("#ultimateStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
     });
   });
 
@@ -38,7 +38,7 @@ $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for
 	  $('#ssb64').hide();
     $('#Melee').hide();
     $('#Brawl').hide();
-    $('#ProjectM').hide();
+    $('#Ultimate').hide();
   });
   
   $('.64').click(function(){
@@ -47,7 +47,7 @@ $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for
     $(this).css({"background-color":"#ffe"});
     $('#Melee').hide();
     $('#Brawl').hide();
-    $('#ProjectM').hide();
+    $('#Ultimate').hide();
     $('#smash4').hide();
     $('#smash4wiiu').hide();
   });
@@ -58,7 +58,7 @@ $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for
     $('#ssb64').hide();
     $('#Melee').show();
     $('#Brawl').hide();
-    $('#ProjectM').hide();
+    $('#Ultimate').hide();
     $('#smash4').hide();
     $('#smash4wiiu').hide();
   });
@@ -69,18 +69,18 @@ $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for
     $('#ssb64').hide();
     $('#Melee').hide();
     $('#Brawl').show();
-    $('#ProjectM').hide();
+    $('#Ultimate').hide();
     $('#smash4').hide();
     $('#smash4wiiu').hide();
   });
 
-  $('.pm').click(function(){
+  $('.ultimate').click(function(){
     $('th').css({"background-color":"#f5f5f5"});
     $(this).css({"background-color":"#ffe"});
     $('#ssb64').hide();
     $('#Melee').hide();
     $('#Brawl').hide();
-    $('#ProjectM').show();
+    $('#Ultimate').show();
     $('#smash4').hide();
     $('#smash4wiiu').hide();
   });
