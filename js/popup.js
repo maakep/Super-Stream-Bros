@@ -1,93 +1,119 @@
-$(document).ready(function() {
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20For%20Wii%20U&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#4streamwiiu").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
-$.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20for%20Nintendo%203DS&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#4stream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#64Stream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Melee&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#meleeStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Brawl&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#brawlStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
-  $.getJSON('https://api.twitch.tv/kraken/streams?game=Super%20Smash%20Bros.%20Ultimate&client_id=84yncem7d3f8iv4kw7ibxjiv2i4lfxe', function(d) {
-    $.each(d.streams, function(i, stream){
-        $("#ultimateStream").append('<tr><td><a href="'+stream.channel.url+'" target=_blank alt="'+stream.channel.status+'"><div class="tdlink">'+stream.channel.display_name+'</div></a></td><td>'+stream.viewers+'</td></tr>');
-    });
-  });
+var gameDict = {
+  '16282': 'Melee',
+  '504461': 'Ultimate',
+  '18833': 'Brawl',
+  '17516': "64",
+  '488353': 'Wii U',
+  '489023': '3DS',
+};
 
-  $('.smash4').click(function(){
-    $('#smash4').show();
-    $('#smash4wiiu').show();
-    $('th').css({"background-color":"#f5f5f5"});
-    $(this).css({"background-color":"#ffe"});
-	  $('#ssb64').hide();
-    $('#Melee').hide();
-    $('#Brawl').hide();
-    $('#Ultimate').hide();
-  });
-  
-  $('.64').click(function(){
-    $('#ssb64').show();
-    $('th').css({"background-color":"#f5f5f5"});
-    $(this).css({"background-color":"#ffe"});
-    $('#Melee').hide();
-    $('#Brawl').hide();
-    $('#Ultimate').hide();
-    $('#smash4').hide();
-    $('#smash4wiiu').hide();
-  });
-
-  $('.melee').click(function(){
-    $('th').css({"background-color":"#f5f5f5"});
-    $(this).css({"background-color":"#ffe"});
-    $('#ssb64').hide();
-    $('#Melee').show();
-    $('#Brawl').hide();
-    $('#Ultimate').hide();
-    $('#smash4').hide();
-    $('#smash4wiiu').hide();
-  });
-
-  $('.brawl').click(function(){
-    $('th').css({"background-color":"#f5f5f5"});
-    $(this).css({"background-color":"#ffe"});
-    $('#ssb64').hide();
-    $('#Melee').hide();
-    $('#Brawl').show();
-    $('#Ultimate').hide();
-    $('#smash4').hide();
-    $('#smash4wiiu').hide();
-  });
-
-  $('.ultimate').click(function(){
-    $('th').css({"background-color":"#f5f5f5"});
-    $(this).css({"background-color":"#ffe"});
-    $('#ssb64').hide();
-    $('#Melee').hide();
-    $('#Brawl').hide();
-    $('#Ultimate').show();
-    $('#smash4').hide();
-    $('#smash4wiiu').hide();
-  });
-
-  $('th').hover(function(){
-    $(this).css({"opacity":"0.6"});
-  },function(){
-    $(this).css({"opacity":"1"});
-  });
+var games = JSON.parse(localStorage.getItem('preferences-games')) || Object.keys(gameDict);
+var header = document.getElementById("game-choice-list");
+var settingsForm = document.getElementById("settings-games");
+games.forEach(g => {
+  var id = g;
+  var val = gameDict[g];
+  header.innerHTML += `<span data-game="${id}" class="game-choice">${val}</span>`;
 });
+
+Object.keys(gameDict).forEach(g => {
+  var id = g;
+  var val = gameDict[g];
+  settingsForm.innerHTML += `<label><input value="${id}" type="checkbox" checked/> ${val}</label><br />`
+});
+
+async function get(url) {
+  var f = await fetch(url,
+    {
+      method: 'GET',
+      headers: {
+        'Client-ID': '84yncem7d3f8iv4kw7ibxjiv2i4lfxe',
+      }
+    }
+  );
+  var j = f.json();
+  return j;
+}
+
+var root = document.getElementById("root");
+var selectedGame = localStorage.getItem('selected-game');
+var streams = undefined;
+
+(async function main() {
+  var url = 'https://api.twitch.tv/helix/streams?first=100';
+  games.forEach(g => {
+    url += `&game_id=${g}`;
+  });
+  var fetchStreamers = await get(url);
+  streams = fetchStreamers.data;
+  if (selectedGame != null && games.includes(selectedGame)) {
+    document.querySelectorAll(`#game-choice-list span[data-game='${selectedGame}']`)[0].className += " active";
+  }
+
+  displayGames(selectedGame);
+})();
+
+var displayGames = (id) => {
+  var streamsToDisplay = streams;
+  selectedGame = id;
+  root.innerHTML = "";
+
+  if (selectedGame != null) {
+    localStorage.setItem('selected-game', selectedGame);
+  }
+
+  if (id != null)
+    streamsToDisplay = streams.filter(x => x.game_id === id);
+
+  console.log(id);
+  streamsToDisplay.forEach((s, i) => {
+    var oddOrEven = i % 2 === 0 ? "even" : "odd";
+    root.innerHTML += `
+        <img class="stream-thumbnail ${oddOrEven}" src="${s.thumbnail_url.replace("{width}", "90").replace("{height}", "50")}" />
+        <a class="stream-row-link ${oddOrEven}" href="https://twitch.tv/${s.user_name}" target=_blank alt="${s.title}">
+          <div class="tdlink">${s.user_name}</div>
+        </a>
+        <div class="stream-row-viewers ${oddOrEven}">
+          ${s.viewer_count}
+        </div>`;
+  });
+}
+
+function gameClicked(game) {
+  var id = game.target.dataset.game;
+  var actives = document.querySelectorAll(".active");
+  if (actives != null) {
+    [].forEach.call(actives, function (el) {
+      el.classList.remove("active");
+    });
+  }
+  game.target.className += " active";
+  if (selectedGame === id)
+    return;
+
+  displayGames(id);
+}
+
+Array.from(document.getElementsByClassName("game-choice")).forEach((e) => {
+  e.addEventListener('click', gameClicked);
+});
+
+document.getElementById("settings").addEventListener('click', settingsClicked);
+
+function settingsClicked() {
+  document.getElementById("settings-overlay").style = "display: block";
+}
+
+document.getElementById("settings-form").addEventListener('submit', settingsSaved);
+
+function settingsSaved(e) {
+
+  var gameIdPreferences = [];
+  for (var i = 0; i < e.target.length - 1; i++) { // -1 to skip the Submit button
+    if (e.target[i].checked) {
+      gameIdPreferences.push(e.target[i].defaultValue);
+    }
+  }
+  localStorage.setItem('preferences-games', JSON.stringify(gameIdPreferences));
+  document.getElementById("settings-overlay").style = "display: none";
+}

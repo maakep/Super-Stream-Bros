@@ -1,48 +1,36 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Super Stream Bros</title>
 
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-	
-	
-  </head>
+<head>
+  <title>Super Stream Bros</title>
 
-  <body>
-    <table>
-      <tr>
-        <th class="ultimate">Ultimate</th><th class="smash4">Sm4sh</th><th class="melee">Melee</th><th class="brawl">Brawl</th><th class="64">64</th>
-      </tr>
-      <tr>
-        <td colspan="4">Streamer</td><td>Viewers</td>
-      </tr>
-    </table>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 
-  <div id="smash4wiiu">
-    <table id="4streamwiiu">
-    </table>
+<body>
+  <div style="display: none;" id="settings-overlay">
+    <form id="settings-form">
+      <h1>Preferences</h1>
+      Only display the following games...
+      <div id="settings-games">
+      </div>
+      <input type="submit" value="Save & exit" /> <br />
+      <i>
+        (Preferences are updated next time you use the extension)
+      </i>
+    </form>
   </div>
-	<div id="smash4">
-		<table id="4stream">
-		</table>
-	</div>
-	 <div id="Melee">
-      <table id="meleeStream">
-      </table>
+  <div id="settings">
+    <span class="gear"></span>
+  </div>
+  <div id="game-choice-list">
+  </div>
+
+  <div class="game-background">
+    <div class="stream-table" id="root">
     </div>
-    <div id="Ultimate">
-      <table id="ultimateStream">
-      </table>
-    </div>   
-    <div id="Brawl">
-      <table id="brawlStream">
-      </table>
-    </div>
-	 <div id="ssb64">
-      <table id="64Stream">
-      </table>
-    </div>
-  </body>
+  </div>
+</body>
+<script type="text/javascript" src="js/popup.js"></script>
+
 </html>
